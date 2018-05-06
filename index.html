@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>随机提问</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".back").css("height",window.innerHeight);
+		});
+	</script>
+</head>
+<body>
+	<div class="back">
+		<div class="main">
+			<h2 class="title">寻找帅哥和美女</h2>
+			<div class="result">？？？</div><br>
+			<button class="button begin" style="vertical-align:middle"><span>开始 </span></button>
+			<button class="button end" style="vertical-align:middle"><span>选定 </span></button>
+		</div>
+		<div class="footer">Power By 高谦 2018   源代码地址：https://github.com/qianqianjun/ChoosePeople   绝对公正，欢迎检查！</div>
+	</div>
+	<script type="text/javascript">
+		var num;
+		var people=new Array('高谦','徐明瑞','姚帅','杨亮','余中瑞','段浩楠','何伟汉','张昊斌','陈伯雄','李金东','刘权达','刘威');
+		var except=new Array();
+		function replaceelem()
+		{
+			num=Math.floor((Math.random()*100)%people.length);
+			$(".result").empty();
+			$(".result").text(people[num]);
+		}
+		$(".begin").click(function(){
+			time=setInterval(replaceelem,20);
+		});
+		$(".end").click(function(){
+			clearInterval(time);
+			if(except.indexOf(num)>=0)
+			{
+				while(except.indexOf(num)>=0)
+				{
+					num=(num+1)%people.length;
+				}
+				except.push(num);
+				$(".result").empty();
+			    $(".result").text(people[num]);
+				console.log(num);
+			}
+			else
+			{
+				except.push(num);
+				console.log(num);
+			}
+		});
+	</script>
+</body>
+</html>
